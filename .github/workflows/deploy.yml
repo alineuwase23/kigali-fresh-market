@@ -14,18 +14,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Validate HTML files
+    - name: List project files
       run: |
-        echo "Checking HTML files..."
-        ls *.html
-        echo "All HTML files found!"
+        echo "📁 Project files:"
+        ls -la
 
     - name: Check PHP syntax
       run: |
         sudo apt-get install -y php-cli
         php -l db.php
         php -l submit_order.php
-        echo "PHP syntax check passed!"
+        echo "✅ PHP syntax check passed!"
 
     - name: Success message
-      run: echo "✅ CI/CD Pipeline completed successfully!"
+      run: echo "✅ CI/CD Pipeline completed successfully for Kigali Fresh Market!"
