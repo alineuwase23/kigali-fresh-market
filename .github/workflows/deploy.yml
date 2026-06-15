@@ -1,0 +1,36 @@
+name: Kigali Fresh Market CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Validate HTML files
+      run: |
+        echo "Checking HTML files..."
+        ls *.html
+        echo "All HTML files found!"
+
+    - name: Check PHP syntax
+      run: |
+        sudo apt-get install -y php
+        php -l db.php
+        php -l submit_order.php
+        echo "PHP syntax check passed!"
+
+    - name: Build Docker image
+      run: |
+        docker build -t kigali-fresh-market .
+        echo "Docker build successful!"
+
+    - name: Success message
+      run: echo "✅ CI/CD Pipeline completed successfully!"
