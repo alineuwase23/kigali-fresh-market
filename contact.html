@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Kigali Fresh Market</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            color: white;
+            padding: 150px 40px 80px;
+            text-align: center;
+        }
+        .contact-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .contact-hero h1 span { color: var(--orange); }
+        .contact-hero p {
+            font-size: 18px;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-section {
+            padding: 80px 40px;
+            background: var(--cream);
+        }
+
+        .contact-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-box {
+            flex: 1;
+            min-width: 280px;
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            border-radius: 25px;
+            padding: 40px;
+            color: white;
+        }
+
+        .contact-info-box h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .contact-info-box p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 35px;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .info-text p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-form-box {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .contact-form-box h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .contact-form-box h2 span { color: var(--green); }
+
+        .contact-form-box p {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+            outline: none;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green);
+            background: white;
+        }
+
+        .form-group textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--green), #4CAF50);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--orange), #FFB74D);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,152,0,0.4);
+        }
+
+        .success-msg {
+            display: none;
+            background: #f1f8e9;
+            border: 2px solid var(--green);
+            color: var(--green);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .map-section {
+            padding: 0 40px 80px;
+            background: var(--cream);
+        }
+
+        .map-box {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .map-box h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            border-radius: 15px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: var(--green);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🛒 Kigali <span>Fresh</span> Market</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart 🛒 <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="contact-hero">
+        <h1>Contact <span>Us</span></h1>
+        <p>We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.</p>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-wrapper">
+
+            <!-- INFO BOX -->
+            <div class="contact-info-box">
+                <h2>Get In Touch</h2>
+                <p>Have a question or want to place an order? We're here to help you!</p>
+
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-text">
+                        <h4>Email</h4>
+                        <p>kigalifreshmarket@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-text">
+                        <h4>Phone</h4>
+                        <p>+250 788 000 000</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h4>Address</h4>
+                        <p>KG 123 St, Kigali, Rwanda</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">⏰</div>
+                    <div class="info-text">
+                        <h4>Working Hours</h4>
+                        <p>Mon - Sat: 8AM - 8PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM BOX -->
+            <div class="contact-form-box">
+                <h2>Send a <span>Message</span></h2>
+                <p>Fill in the form below and we'll respond within 24 hours</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="Your email">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="phone" placeholder="+250 ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="subject">
+                            <option value="">Select subject</option>
+                            <option value="Order Inquiry">Order Inquiry</option>
+                            <option value="Delivery Issue">Delivery Issue</option>
+                            <option value="Product Question">Product Question</option>
+                            <option value="Complaint">Complaint</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Message</label>
+                    <textarea id="message" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button class="submit-btn" onclick="submitForm()">
+                    📨 Send Message
+                </button>
+
+                <div class="success-msg" id="success-msg">
+                    ✅ Thank you! Your message has been sent. We'll get back to you soon!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section">
+        <div class="map-box">
+            <h3>📍 Find Us in Kigali</h3>
+            <div class="map-placeholder">
+                🗺️ KG 123 St, Kigali, Rwanda
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>🛒 Kigali <span>Fresh</span> Market</h3>
+                <p>Your trusted online food store in Rwanda.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Us</h4>
+                <a href="#">📧 kigalifreshmarket@gmail.com</a>
+                <a href="#">📞 +250 788 000 000</a>
+                <a href="#">📍 KG 123 St, Kigali, Rwanda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kigali Fresh Market. All rights reserved. | Designed with ❤️ in Rwanda</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                document.getElementById('success-msg').style.display = 'block';
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill in Name, Email and Message!');
+            }
+        }
+    </script>
+</body>
+</html>

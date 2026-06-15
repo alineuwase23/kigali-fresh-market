@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Kigali Fresh Market</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            color: white;
+            padding: 150px 40px 80px;
+            text-align: center;
+        }
+        .about-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .about-hero h1 span { color: var(--orange); }
+        .about-hero p {
+            font-size: 18px;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+
+        .about-story {
+            padding: 80px 40px;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .about-story img {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        .about-text h2 span { color: var(--green); }
+        .about-text p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mission-section {
+            background: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .mission-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+        .mission-card {
+            background: var(--cream);
+            border-radius: 20px;
+            padding: 35px 25px;
+            width: 280px;
+            border-left: 4px solid var(--green);
+            transition: all 0.3s ease;
+        }
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        .mission-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+        .mission-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* CEO SECTION */
+        .ceo-about {
+            background: var(--cream);
+            padding: 80px 40px;
+        }
+        .ceo-about-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .ceo-about-img {
+            width: 250px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 4px solid var(--orange);
+            flex-shrink: 0;
+        }
+        .ceo-about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        .ceo-about-text .title {
+            color: var(--orange);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .ceo-about-text p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+        }
+        .ceo-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .ceo-stat {
+            text-align: center;
+        }
+        .ceo-stat .number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .ceo-stat .label {
+            font-size: 12px;
+            color: #888;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .values-section {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+        }
+        .values-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+        .value-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px 25px;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        .value-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        .value-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .value-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--orange);
+        }
+        .value-card p {
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🛒 Kigali <span>Fresh</span> Market</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart 🛒 <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- ABOUT HERO -->
+    <div class="about-hero">
+        <h1>About <span>Kigali Fresh Market</span></h1>
+        <p>We are Rwanda's trusted online food store, bringing fresh and authentic products directly to your door.</p>
+    </div>
+
+    <!-- OUR STORY -->
+    <section style="background:var(--cream); padding:80px 40px;">
+        <div class="about-story">
+            <img src="images/coffee.jpg" alt="Our Story">
+            <div class="about-text">
+                <h2>Our <span>Story</span></h2>
+                <p>Kigali Fresh Market was founded with a simple but powerful vision — to make fresh, quality Rwandan food products accessible to everyone through the power of technology.</p>
+                <p>We started as a small initiative to support local farmers and food producers in Rwanda. Today, we have grown into a trusted online marketplace serving hundreds of customers across Kigali.</p>
+                <p>Every product we sell is carefully selected to ensure the highest quality, freshness, and authenticity. We believe in supporting local agriculture while delivering convenience to our customers.</p>
+                <a href="products.html" class="btn-primary" style="margin-top:10px;">Shop Our Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="mission-section">
+        <h2 class="section-title">Our <span>Mission & Vision</span></h2>
+        <p class="section-subtitle">What drives us every day</p>
+        <div class="mission-grid">
+            <div class="mission-card">
+                <h3>🎯 Our Mission</h3>
+                <p>To connect Rwandan food producers with customers online, making fresh and authentic local products accessible to everyone while supporting local agriculture.</p>
+            </div>
+            <div class="mission-card">
+                <h3>🌟 Our Vision</h3>
+                <p>To become Rwanda's leading online food marketplace, known for quality, freshness, and exceptional customer service across the entire country.</p>
+            </div>
+            <div class="mission-card">
+                <h3>💚 Our Values</h3>
+                <p>Quality, integrity, community, and sustainability are at the heart of everything we do. We believe in honest business and genuine care for our customers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO SECTION -->
+    <section class="ceo-about">
+        <h2 class="section-title" style="text-align:center; margin-bottom:10px;">Meet Our <span>Founder</span></h2>
+        <p class="section-subtitle" style="text-align:center; margin-bottom:40px;">The person behind the vision</p>
+        <div class="ceo-about-card">
+            <img src="images/ceo.jpg" alt="CEO Aline Uwase" class="ceo-about-img">
+            <div class="ceo-about-text">
+                <h2>Aline Uwase</h2>
+                <span class="title">👑 Founder & CEO</span>
+                <p>Aline Uwase is the founder and CEO of Kigali Fresh Market. With a passion for technology and a deep love for Rwandan culture and food, she created this platform to bridge the gap between local farmers and modern consumers.</p>
+                <p>As a student of Information Systems Management at UNILAK, Aline combined her technical skills with entrepreneurial spirit to build a platform that makes a real difference in people's lives.</p>
+                <p>"I believe technology can transform how we access food in Rwanda. My goal is to make fresh, quality products available to every household with just a few clicks."</p>
+                <div class="ceo-stats">
+                    <div class="ceo-stat">
+                        <div class="number">500+</div>
+                        <div class="label">Customers</div>
+                    </div>
+                    <div class="ceo-stat">
+                        <div class="number">25+</div>
+                        <div class="label">Products</div>
+                    </div>
+                    <div class="ceo-stat">
+                        <div class="number">100%</div>
+                        <div class="label">Fresh</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+        <h2 class="section-title" style="color:white;">Our Core <span style="color:var(--orange)">Values</span></h2>
+        <p class="section-subtitle" style="color:rgba(255,255,255,0.7);">What makes us different</p>
+        <div class="values-grid">
+            <div class="value-card">
+                <span class="value-icon">🌿</span>
+                <h3>Freshness</h3>
+                <p>We guarantee the freshest products sourced directly from local farms</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🤝</span>
+                <h3>Community</h3>
+                <p>Supporting local farmers and producers across Rwanda</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">⭐</span>
+                <h3>Quality</h3>
+                <p>Every product is carefully selected for the highest quality standards</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🚀</span>
+                <h3>Innovation</h3>
+                <p>Using technology to make food shopping easier and more convenient</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>🛒 Kigali <span>Fresh</span> Market</h3>
+                <p>Your trusted online food store in Rwanda.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Us</h4>
+                <a href="#">📧 kigalifreshmarket@gmail.com</a>
+                <a href="#">📞 +250 788 000 000</a>
+                <a href="#">📍 KG 123 St, Kigali, Rwanda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kigali Fresh Market. All rights reserved. | Designed with ❤️ in Rwanda</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

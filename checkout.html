@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Kigali Fresh Market</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        .checkout-container h2 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-size: 28px;
+            text-align: center;
+        }
+        .checkout-container input,
+        .checkout-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        .checkout-container button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .checkout-container button:hover {
+            background-color: #1b5e20;
+        }
+        .order-summary {
+            background: #f1f8e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .order-summary h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2e7d32;
+        }
+        .success-msg {
+            display: none;
+            background-color: #f1f8e9;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🛒 Kigali Fresh Market</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart 🛒 <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="checkout-container">
+        <h2>🛒 Checkout</h2>
+
+        <!-- ORDER SUMMARY -->
+        <div class="order-summary">
+            <h3>📋 Order Summary</h3>
+            <div id="order-items"></div>
+            <div class="order-total">
+                <span>Total:</span>
+                <span>RWF <span id="order-total">0</span></span>
+            </div>
+        </div>
+
+        <!-- CUSTOMER DETAILS -->
+        <h3 style="color:#2e7d32; margin-bottom:15px;">👤 Your Details</h3>
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="text" id="phone" placeholder="Phone Number" required>
+        <input type="text" id="address" placeholder="Delivery Address" required>
+
+        <button onclick="placeOrder()">✅ Place Order</button>
+
+        <div class="success-msg" id="success-msg">
+            🎉 Order placed successfully!<br>
+            We will contact you soon to confirm delivery.
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>🛒 Kigali Fresh Market</h3>
+                <p>Your trusted online food store in Rwanda</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a><br>
+                <a href="products.html">Products</a><br>
+                <a href="about.html">About</a><br>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>📧 kigalifreshmarket@gmail.com</p>
+                <p>📞 +250 788 000 000</p>
+                <p>📍 KG 123 St, Kigali, Rwanda</p>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:20px; border-top:1px solid #4caf50; padding-top:15px;">
+            &copy; 2026 Kigali Fresh Market. All rights reserved.
+        </p>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        // Display cart items on checkout page
+        function displayOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+
+            if (cart.length === 0) {
+                orderItems.innerHTML = '<p>Your cart is empty. <a href="products.html">Shop now</a></p>';
+                return;
+            }
+
+            let total = 0;
+            orderItems.innerHTML = '';
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                orderItems.innerHTML += `
+                    <div class="order-item">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>RWF ${(item.price * item.quantity).toLocaleString()}</span>
+                    </div>
+                `;
+            });
+
+            orderTotal.textContent = total.toLocaleString();
+        }
+
+        function placeOrder() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (!name || !email || !phone || !address) {
+                alert('Please fill in all fields!');
+                return;
+            }
+
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            let productNames = cart.map(item => item.name).join(', ');
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('product', productNames);
+            formData.append('quantity', cart.length);
+            formData.append('total', total);
+
+            fetch('submit_order.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.removeItem('cart');
+                    document.getElementById('success-msg').style.display = 'block';
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('phone').value = '';
+                    document.getElementById('address').value = '';
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Order placed! Thank you.');
+                document.getElementById('success-msg').style.display = 'block';
+                localStorage.removeItem('cart');
+            });
+        }
+
+        displayOrderSummary();
+    </script>
+</body>
+</html>

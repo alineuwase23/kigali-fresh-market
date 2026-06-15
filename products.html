@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Kigali Fresh Market</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-bar {
+            text-align: center;
+            padding: 100px 20px 20px;
+            background: var(--cream);
+        }
+        .search-bar h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .search-bar h2 span { color: var(--green); }
+        .search-bar input {
+            width: 50%;
+            padding: 14px 25px;
+            border: 2px solid var(--green);
+            border-radius: 50px;
+            font-size: 15px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .filter-buttons {
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 20px;
+            background: var(--cream);
+            padding-bottom: 30px;
+        }
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--green);
+            color: var(--green);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--green);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .product-card small {
+            color: #888;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .products-count {
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🛒 Kigali <span>Fresh</span> Market</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart 🛒 <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="search-bar">
+        <h2>Our <span>Products</span></h2>
+        <p style="color:#666; margin-bottom:20px; font-family:'Inter',sans-serif;">Fresh, quality products delivered to your door</p>
+        <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()">
+    </div>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterProducts('all', this)">🛍️ All</button>
+        <button class="filter-btn" onclick="filterProducts('coffee', this)">☕ Coffee</button>
+        <button class="filter-btn" onclick="filterProducts('honey', this)">🍯 Honey</button>
+        <button class="filter-btn" onclick="filterProducts('juice', this)">🧃 Juices</button>
+        <button class="filter-btn" onclick="filterProducts('spices', this)">🌶️ Spices</button>
+        <button class="filter-btn" onclick="filterProducts('snacks', this)">🍌 Snacks</button>
+        <button class="filter-btn" onclick="filterProducts('vegetables', this)">🥔 Vegetables</button>
+        <button class="filter-btn" onclick="filterProducts('grains', this)">🍚 Grains</button>
+        <button class="filter-btn" onclick="filterProducts('drinks', this)">🥤 Drinks</button>
+        <button class="filter-btn" onclick="filterProducts('dairy', this)">🥛 Dairy</button>
+        <button class="filter-btn" onclick="filterProducts('fruits', this)">🍌 Fruits</button>
+        <button class="filter-btn" onclick="filterProducts('essentials', this)">🛒 Essentials</button>
+        <button class="filter-btn" onclick="filterProducts('bakery', this)">🍞 Bakery</button>
+    </div>
+
+    <div class="products-count" id="products-count">Showing 25 products</div>
+
+    <section class="featured" style="padding-top:20px;">
+        <div class="product-grid" id="productGrid">
+
+            <div class="product-card" data-category="coffee">
+                <div class="badge">Best Seller</div>
+                <img src="images/coffee.jpg" alt="Coffee">
+                <h3>Rwandan Arabica Coffee</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Premium single-origin coffee from the hills of Rwanda (250g)</small>
+                <p class="price">RWF 3,500</p>
+                <button onclick="addToCart('Rwandan Arabica Coffee', 3500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="honey">
+                <div class="badge sale">20% OFF</div>
+                <img src="images/honey.jpg" alt="Honey">
+                <h3>Pure Rwandan Honey</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Raw unfiltered honey harvested from Rwandan highlands (500g)</small>
+                <p class="price"><span class="old-price">RWF 5,000</span> RWF 4,000</p>
+                <button onclick="addToCart('Pure Rwandan Honey', 4000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="juice">
+                <img src="images/juice.jpg" alt="Juice">
+                <h3>Passion Fruit Juice</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Fresh natural passion fruit juice with no added sugar (1L)</small>
+                <p class="price">RWF 2,200</p>
+                <button onclick="addToCart('Passion Fruit Juice', 2200)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="spices">
+                <img src="images/spices.jpg" alt="Spices">
+                <h3>Spice Mix</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Traditional Rwandan seasoning blend, perfect for all meals (100g)</small>
+                <p class="price">RWF 1,800</p>
+                <button onclick="addToCart('Spice Mix', 1800)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="snacks">
+                <div class="badge">New</div>
+                <img src="images/chips.jpg" alt="Chips">
+                <h3>Plantain Chips</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Crispy lightly salted plantain chips, locally made (200g)</small>
+                <p class="price">RWF 1,500</p>
+                <button onclick="addToCart('Plantain Chips', 1500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="vegetables">
+                <img src="images/potatoes.jpg" alt="Potatoes">
+                <h3>Irish Potatoes (5kg)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Fresh Irish potatoes sourced directly from Rwandan farms</small>
+                <p class="price">RWF 3,000</p>
+                <button onclick="addToCart('Irish Potatoes 5kg', 3000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="grains">
+                <img src="images/rice.jpg" alt="Rice">
+                <h3>Rice (2kg)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Premium long grain white rice, perfect for every meal</small>
+                <p class="price">RWF 2,500</p>
+                <button onclick="addToCart('Rice 2kg', 2500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="grains">
+                <div class="badge sale">10% OFF</div>
+                <img src="images/spaghetti.jpg" alt="Spaghetti">
+                <h3>Spaghetti Pack (500g)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Quality dried spaghetti pasta, perfect for quick meals</small>
+                <p class="price"><span class="old-price">RWF 1,400</span> RWF 1,200</p>
+                <button onclick="addToCart('Spaghetti Pack', 1200)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="dairy">
+                <img src="images/milk.jpg" alt="Milk">
+                <h3>Fresh Milk (1L)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Fresh whole milk from Rwandan dairy farms, delivered daily</small>
+                <p class="price">RWF 800</p>
+                <button onclick="addToCart('Fresh Milk 1L', 800)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="drinks">
+                <div class="badge popular">Popular</div>
+                <img src="images/fanta.jpg" alt="Fanta">
+                <h3>Fanta Orange (2L)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Refreshing Fanta Orange soft drink, great for the whole family</small>
+                <p class="price">RWF 1,500</p>
+                <button onclick="addToCart('Fanta Orange 2L', 1500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="dairy">
+                <div class="badge">Fresh</div>
+                <img src="images/eggs.jpg" alt="Eggs">
+                <h3>Eggs (30 pcs)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Fresh farm eggs, protein-rich and locally sourced</small>
+                <p class="price">RWF 4,500</p>
+                <button onclick="addToCart('Eggs 30 pcs', 4500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="vegetables">
+                <img src="images/tomatoes.jpg" alt="Tomatoes">
+                <h3>Tomatoes (1kg)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Fresh ripe tomatoes, perfect for cooking and salads</small>
+                <p class="price">RWF 1,000</p>
+                <button onclick="addToCart('Tomatoes 1kg', 1000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="fruits">
+                <img src="images/bananas.jpg" alt="Bananas">
+                <h3>Bananas (bunch)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Sweet ripe bananas, energy-packed and delicious</small>
+                <p class="price">RWF 1,500</p>
+                <button onclick="addToCart('Bananas bunch', 1500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="bakery">
+                <img src="images/bread.jpg" alt="Bread">
+                <h3>Bread (loaf)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Freshly baked bread loaf, soft and delicious</small>
+                <p class="price">RWF 1,200</p>
+                <button onclick="addToCart('Bread loaf', 1200)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="dairy">
+                <img src="images/yogurt.jpg" alt="Yogurt">
+                <h3>Yogurt (500ml)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Fresh creamy yogurt, perfect for breakfast or snacks</small>
+                <p class="price">RWF 1,500</p>
+                <button onclick="addToCart('Yogurt 500ml', 1500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="fruits">
+                <img src="images/avocado.jpg" alt="Avocado">
+                <h3>Avocado (3 pcs)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Fresh creamy avocados, rich in healthy fats</small>
+                <p class="price">RWF 1,000</p>
+                <button onclick="addToCart('Avocado 3 pcs', 1000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="essentials">
+                <img src="images/sugar.jpg" alt="Sugar">
+                <h3>Sugar (2kg)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Pure white refined sugar, essential for every kitchen</small>
+                <p class="price">RWF 2,800</p>
+                <button onclick="addToCart('Sugar 2kg', 2800)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="essentials">
+                <img src="images/oil.jpg" alt="Cooking Oil">
+                <h3>Cooking Oil (2L)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Pure refined cooking oil, ideal for frying and cooking</small>
+                <p class="price">RWF 4,000</p>
+                <button onclick="addToCart('Cooking Oil 2L', 4000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="fruits">
+                <div class="badge">Local</div>
+                <img src="images/ibitoki.jpg" alt="Ibitoki">
+                <h3>Ibitoki (Green Banana)</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Fresh Rwandan green bananas, perfect for cooking ugali and more</small>
+                <p class="price">RWF 1,500</p>
+                <button onclick="addToCart('Ibitoki Green Banana', 1500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="vegetables">
+                <img src="images/sweet.jpg" alt="Sweet Potatoes">
+                <h3>Sweet Potatoes (3kg)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Fresh sweet potatoes, nutritious and delicious</small>
+                <p class="price">RWF 2,000</p>
+                <button onclick="addToCart('Sweet Potatoes 3kg', 2000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="essentials">
+                <img src="images/cassavaflour.jpg" alt="Cassava Flour">
+                <h3>Cassava Flour (2kg)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Fine quality cassava flour, great for baking and cooking</small>
+                <p class="price">RWF 2,000</p>
+                <button onclick="addToCart('Cassava Flour 2kg', 2000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="snacks">
+                <div class="badge">Popular</div>
+                <img src="images/chocolate.jpg" alt="Chocolate">
+                <h3>Chocolate Bar</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Rich smooth chocolate bar, perfect treat for any occasion</small>
+                <p class="price">RWF 2,500</p>
+                <button onclick="addToCart('Chocolate Bar', 2500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="essentials">
+                <img src="images/blueband.jpg" alt="Blue Band">
+                <h3>Blue Band (500g)</h3>
+                <div class="stars">⭐⭐⭐⭐</div>
+                <small>Smooth and creamy Blue Band margarine, great for bread and cooking</small>
+                <p class="price">RWF 3,500</p>
+                <button onclick="addToCart('Blue Band 500g', 3500)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="dairy">
+                <div class="badge sale">5% OFF</div>
+                <img src="images/nido.jpg" alt="Nido">
+                <h3>Nido Milk Powder</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Premium Nido full cream milk powder, rich in nutrients</small>
+                <p class="price"><span class="old-price">RWF 8,500</span> RWF 8,000</p>
+                <button onclick="addToCart('Nido Milk Powder', 8000)">🛒 Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="bakery">
+                <div class="badge">Special</div>
+                <img src="images/cake.jpg" alt="Cake">
+                <h3>Birthday Cake</h3>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <small>Beautiful custom birthday cake, made fresh to order</small>
+                <p class="price">RWF 15,000</p>
+                <button onclick="addToCart('Birthday Cake', 15000)">🛒 Add to Cart</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>🛒 Kigali <span>Fresh</span> Market</h3>
+                <p>Your trusted online food store in Rwanda. Fresh products, fast delivery, fair prices.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Us</h4>
+                <a href="#">📧 kigalifreshmarket@gmail.com</a>
+                <a href="#">📞 +250 788 000 000</a>
+                <a href="#">📍 KG 123 St, Kigali, Rwanda</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kigali Fresh Market. All rights reserved. | Designed with ❤️ in Rwanda</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        function searchProducts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.product-card');
+            let count = 0;
+            cards.forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                if (name.includes(input)) {
+                    card.style.display = 'block';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('products-count').textContent = `Showing ${count} products`;
+        }
+
+        function filterProducts(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cards = document.querySelectorAll('.product-card');
+            let count = 0;
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('products-count').textContent = `Showing ${count} products`;
+        }
+    </script>
+</body>
+</html>
